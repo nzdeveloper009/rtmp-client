@@ -1,5 +1,8 @@
+import com.android.tools.r8.internal.fr
+
 plugins {
     alias(libs.plugins.android.library)
+    id("maven-publish")
 }
 android {
     namespace = "io.antmedia.rtmp_client"
@@ -46,6 +49,35 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 }
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("maven") {
+                groupId = "com.github.nzdeveloper009"
+                artifactId = "rtmp-client"
+                version = "1.0.0"
+            }
+        }
+    }
+}
+
+/*afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("maven") {
+                from (components["release"])
+                groupId = "com.github.nzdeveloper009"
+                artifactId = "rtmp-client"
+                version = "1.0.0"
+            }
+        }
+
+        repositories {
+            mavenLocal()
+        }
+    }
+}*/
 
 dependencies {
 
